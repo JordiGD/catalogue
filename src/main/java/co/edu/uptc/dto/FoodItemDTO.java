@@ -1,6 +1,5 @@
 package co.edu.uptc.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 @Data
@@ -11,7 +10,7 @@ public class FoodItemDTO {
     private String name;
     private String itemDescription;
     private boolean isVeg;
-    private Number price;
+    private Double price;
     private Long restaurantId;
-    private Number quantity;
+    private Integer quantity;
 }

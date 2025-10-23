@@ -12,15 +12,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class FoodItemService {
+    
+    @Autowired
     FoodItemRepo foodItemRepo;
 
     public FoodItemDTO saveFoodItemDTO(FoodItemDTO foodItemDTO) {
-        FoodItem foodItem = foodItemRepo.save(FoodItemMapper.INSTANCE.mapFromFoodItemDTO(foodItemDTO));
-        return FoodItemMapper.INSTANCE.mapFromFoodItemDTO(foodItem);
+        FoodItem foodItem = foodItemRepo.save(FoodItemMapper.INSTANCE.mapFromFoodItemDTOToEntity(foodItemDTO));
+        return FoodItemMapper.INSTANCE.mapFromEntityToFoodItemDTO(foodItem);
     }
 
     public List<FoodItemDTO> listAllFoodItems() {
         List<FoodItem> listFoodItems = foodItemRepo.findAll();
-        return listFoodItems.stream().map(FoodItemMapper.INSTANCE::mapFromFoodItemDTO).collect(Collectors.toList());
+        return listFoodItems.stream().map(FoodItemMapper.INSTANCE::mapFromEntityToFoodItemDTO).collect(Collectors.toList());
+    }
+
+    public List<FoodItemDTO> findByIds(List<Long> ids) {
+        List<FoodItem> foodItems = foodItemRepo.findAllById(ids);
+        return foodItems.stream().map(FoodItemMapper.INSTANCE::mapFromEntityToFoodItemDTO).collect(Collectors.toList());
     }
 }

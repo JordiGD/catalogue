@@ -20,9 +20,9 @@ public class FoodItem {
     private String name;
     private String itemDescription;
     private boolean isVeg;
-    private Number price;
+    private Double price;
     private Long restaurantId;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
-    private Number quantity;
+    private Integer quantity;
 }
